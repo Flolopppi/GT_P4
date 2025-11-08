@@ -54,4 +54,29 @@ class PrimeFilter
             }
         }
     }
+
+
+    public ArrayList<Integer> filterNonPrimeNumbers()
+    {   
+        // ArrayList<Integer> numbersCopy = this.numbers;
+        for (int i = 0; i < this.numbers.size(); i++) 
+        {
+            int currentOuterNumber = this.numbers.get(i);
+
+            if (this.isPrimeNumber(currentOuterNumber))
+            {
+                for (int j = 0; j < this.numbers.size(); j++) 
+                {
+                    int currentInnerNumber = this.numbers.get(j);
+
+                    if (currentInnerNumber != currentOuterNumber && currentInnerNumber % currentOuterNumber == 0)
+                    {
+                        this.numbers.remove(j);
+                    }
+                }
+            }
+        }
+
+        return this.numbers;
+    }
 }

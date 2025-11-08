@@ -29,17 +29,17 @@ const cutOutPrimes = (numsArr: number[]) => {
     for (const num of nums) {
       console.log(nums);
 
-      if (num !== primeNum && num % primeNum === 0) {
-        nums.splice(nums.indexOf(num, 1));
-      }
+      // if (num !== primeNum && num % primeNum === 0) {
+      //   nums.splice(nums.indexOf(num, 1));
+      // }
 
-      //   nums.forEach(() => {
-      //     console.log(nums);
+        nums.forEach(() => {
+          console.log(nums);
 
-      //     nums = nums.filter((num) => {
-      //       return !(num !== primeNum && num % primeNum === 0);
-      //     });
-      //   });
+          nums = nums.filter((num) => {
+            return !(num !== primeNum && num % primeNum === 0);
+          });
+        });
     }
 
     if (index === 0) {
