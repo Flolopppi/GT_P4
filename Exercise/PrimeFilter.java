@@ -4,15 +4,15 @@ import java.util.Arrays;
 
 class PrimeFilter {
     private boolean[] numbersCollection;
-    private int counterStart;
-    private int counterEnd;
+    private final int counterStart;
+    private final int counterEnd;
 
     public PrimeFilter()
     {
         this.numbersCollection = new boolean[48];
-        this.populateNumbersCollection();
         this.counterStart = 0;
         this.counterEnd = 48;
+        this.populateNumbersCollection();
     }
 
     public String getNumbersCollection()
@@ -71,7 +71,7 @@ class PrimeFilter {
 
     private void populateNumbersCollection()
     {
-        for (int i = 0; i < 48; i++)
+        for (int i = this.counterStart; i < this.counterEnd; i++)
         {
             this.numbersCollection[i] = true;
         }
