@@ -1,4 +1,4 @@
-const nums = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+const nums = Array.from({ length: 999 }, (_, i) => i + 2);
 
 const isPrimeNumber = (num: number): boolean => {
   for (let i = 2; i < num; i++) {
@@ -11,7 +11,6 @@ const isPrimeNumber = (num: number): boolean => {
 };
 
 const cutOutPrimes = (numsArr: number[]) => {
-  // mache nums zu einem array OHNE vielfache der aktuellen PrimZahl
   const primeNums: number[] = [];
   let nums = [...numsArr];
 
@@ -21,42 +20,17 @@ const cutOutPrimes = (numsArr: number[]) => {
     }
   }
 
-  console.log("start primeNums: ", primeNums);
-  console.log("start nums: ", nums);
-  console.log("----------");
-
   primeNums.forEach((primeNum, index) => {
     for (const num of nums) {
-      console.log(nums);
-
-      // if (num !== primeNum && num % primeNum === 0) {
-      //   nums.splice(nums.indexOf(num, 1));
-      // }
-
-        nums.forEach(() => {
-          console.log(nums);
-
-          nums = nums.filter((num) => {
-            return !(num !== primeNum && num % primeNum === 0);
-          });
+      nums.forEach(() => {
+        nums = nums.filter((num) => {
+          return !(num !== primeNum && num % primeNum === 0);
         });
+      });
     }
-
-    if (index === 0) {
-      console.log(nums);
-    }
-
-    console.log(
-      nums,
-      "after iteration: " + index + " with primeNumber: ",
-      primeNum
-    );
   });
 
-  console.log("----------");
-  console.log("end primeNumber: ", primeNums);
-  console.log("end nums: ", nums);
-  console.log("\n");
+  console.log(nums);
 };
 
 cutOutPrimes(nums);

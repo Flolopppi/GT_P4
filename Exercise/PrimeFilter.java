@@ -1,43 +1,72 @@
 package Exercise;
-import java.util.ArrayList;
 
-class PrimeFilter 
-{
-    private ArrayList<Integer> numbers = new ArrayList<Integer>();
-    private ArrayList<Integer> primeNumbers = new ArrayList<Integer>();
+import java.util.Arrays;
 
+class PrimeFilter {
+    private boolean[] numbersCollection;
+    private int counter;
 
-    public PrimeFilter(int rangeStart, int rangeEnd) 
+    public PrimeFilter()
     {
-        createNumbersCollectWithinRange(rangeStart, rangeEnd);
-        getAllPrimeNumbersFromCollection();
+        this.numbersCollection = new boolean[48];
+        this.counter = 0;
+        this.populateNumbersCollection();
     }
 
-
-    public ArrayList<Integer> getNumbers()
+    public String getNumbersCollection()
     {
-        return this.numbers;
+        return Arrays.toString(this.numbersCollection);
     }
 
-
-    public ArrayList<Integer> getPrimeNumbers()
+    public void mapIndexToNumber()
     {
-        return this.primeNumbers;
-    }
+        for (int i = 0; i < this.numbersCollection.length; i++)
+        {
+            int numberRepresentedByIndex = i + 2;
 
-
-    private void createNumbersCollectWithinRange(int rangeStart, int rangeEnd)
-    {
-        for (int i = rangeStart; i < rangeEnd + 1; i++) {
-            this.numbers.add(i);
+            if (this.numbersCollection[i])
+            {
+                System.out.println("Value at index: " + i + " = " + this.numbersCollection[i] + " with number: " + numberRepresentedByIndex);
+            }
         }
     }
 
-
-    private boolean isPrimeNumber(int numberToCheck) 
+    public int getCounter()
     {
-        for (int i = 2; i < numberToCheck; i++) {
-            if (numberToCheck % i == 0) {
+        return this.counter;
+    }
+
+    public void markPrimeNumbers()
+    {
+        System.out.println(this.numbersCollection.length);
+
+        for (int i = 0; i < this.numbersCollection.length; i++)
+        {
+            int numberRepresentedByIndex = i + 2;
+
+            if (this.isPrimeNumber(numberRepresentedByIndex))
+            {       
+                System.out.println(numberRepresentedByIndex);
+
+                for (int j = numberRepresentedByIndex; j < this.numbersCollection.length + 2;)
+                {
+                    if (j != numberRepresentedByIndex)
+                    {
+                        this.numbersCollection[j - 2] = false;
+                    }
+
+                    j = numberRepresentedByIndex + 1 * j;
+                }
+            }
+        }
+    }
+
+    private boolean isPrimeNumber(int numberToCheck)
+    {
+        for (int i = 2; i < numberToCheck; i++)
+        {
+            if (numberToCheck % i == 0)
+            {
                 return false;
             }
         }
@@ -45,38 +74,11 @@ class PrimeFilter
         return true;
     }
 
-
-    private void getAllPrimeNumbersFromCollection() 
+    private void populateNumbersCollection()
     {
-        for (int i = 0; i < this.numbers.size(); i++) {
-            if (this.isPrimeNumber(i)) {
-                this.primeNumbers.add(i);
-            }
-        }
-    }
-
-
-    public ArrayList<Integer> filterNonPrimeNumbers()
-    {   
-        // ArrayList<Integer> numbersCopy = this.numbers;
-        for (int i = 0; i < this.numbers.size(); i++) 
+        for (int i = 0; i < 48; i++)
         {
-            int currentOuterNumber = this.numbers.get(i);
-
-            if (this.isPrimeNumber(currentOuterNumber))
-            {
-                for (int j = 0; j < this.numbers.size(); j++) 
-                {
-                    int currentInnerNumber = this.numbers.get(j);
-
-                    if (currentInnerNumber != currentOuterNumber && currentInnerNumber % currentOuterNumber == 0)
-                    {
-                        this.numbers.remove(j);
-                    }
-                }
-            }
+            this.numbersCollection[i] = true;
         }
-
-        return this.numbers;
     }
 }
