@@ -38,16 +38,12 @@ class PrimeFilter {
 
     public void markPrimeNumbers()
     {
-        System.out.println(this.numbersCollection.length);
-
         for (int i = 0; i < this.numbersCollection.length; i++)
         {
             int numberRepresentedByIndex = i + 2;
 
             if (this.isPrimeNumber(numberRepresentedByIndex))
             {       
-                System.out.println(numberRepresentedByIndex);
-
                 for (int j = numberRepresentedByIndex; j < this.numbersCollection.length + 2;)
                 {
                     if (j != numberRepresentedByIndex)
