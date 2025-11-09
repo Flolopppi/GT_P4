@@ -4,13 +4,15 @@ import java.util.Arrays;
 
 class PrimeFilter {
     private boolean[] numbersCollection;
-    private int counter;
+    private int counterStart;
+    private int counterEnd;
 
     public PrimeFilter()
     {
         this.numbersCollection = new boolean[48];
-        this.counter = 0;
         this.populateNumbersCollection();
+        this.counterStart = 0;
+        this.counterEnd = 48;
     }
 
     public String getNumbersCollection()
@@ -31,9 +33,9 @@ class PrimeFilter {
         }
     }
 
-    public int getCounter()
+    public int getPrimeNumbersCount()
     {
-        return this.counter;
+        return this.countPrimeNumbers();    
     }
 
     public void markPrimeNumbers()
@@ -44,12 +46,9 @@ class PrimeFilter {
 
             if (this.isPrimeNumber(numberRepresentedByIndex))
             {       
-                for (int j = numberRepresentedByIndex; j < this.numbersCollection.length + 2;)
+                for (int j = numberRepresentedByIndex * numberRepresentedByIndex; j < this.numbersCollection.length + 2;)
                 {
-                    if (j != numberRepresentedByIndex)
-                    {
-                        this.numbersCollection[j - 2] = false;
-                    }
+                    this.numbersCollection[j - 2] = false;
 
                     j = numberRepresentedByIndex + 1 * j;
                 }
@@ -76,5 +75,20 @@ class PrimeFilter {
         {
             this.numbersCollection[i] = true;
         }
+    }
+
+    private int countPrimeNumbers()
+    {
+        int counter = 0;
+
+        for (int i = this.counterStart; i < this.counterEnd; i++)
+        {   
+            if (this.numbersCollection[i])
+            {
+                counter++;
+            }
+        }
+
+        return counter;
     }
 }
